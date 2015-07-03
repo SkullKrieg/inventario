@@ -169,6 +169,7 @@ class Usuario extends \yii\db\ActiveRecord
                                                                     ['label'=>'Usuarios','url' =>['usuario/index']],
                                                                     ['label'=>'Grupos','url' =>['grupo/index']],
                                                                     ['label'=>'Acciones','url' =>['accion/index']],
+                                                                    ['label'=>'Bitacora','url' =>['bitacora/index']],
                                                         ]]                                                                                                             
                 ];
 
