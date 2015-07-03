@@ -215,7 +215,7 @@ abstract class ErrorHandler extends Component
         } elseif ($exception instanceof \ErrorException) {
             $category .= ':' . $exception->getSeverity();
         }
-        Yii::error($exception, $category);
+        Yii::error((string) $exception, $category);
     }
 
     /**

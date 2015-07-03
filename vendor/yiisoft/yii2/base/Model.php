@@ -103,10 +103,10 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      *
      * where
      *
-     *  - attribute list: required, specifies the attributes array to be validated, for single attribute you can pass a string;
+     *  - attribute list: required, specifies the attributes array to be validated, for single attribute you can pass string;
      *  - validator type: required, specifies the validator to be used. It can be a built-in validator name,
      *    a method name of the model class, an anonymous function, or a validator class name.
-     *  - on: optional, specifies the [[scenario|scenarios]] array in which the validation
+     *  - on: optional, specifies the [[scenario|scenarios]] array when the validation
      *    rule can be applied. If this option is not set, the rule will apply to all scenarios.
      *  - additional name-value pairs can be specified to initialize the corresponding validator properties.
      *    Please refer to individual validator class API for possible properties.
@@ -119,13 +119,12 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
      * function validatorName($attribute, $params)
      * ~~~
      *
-     * In the above `$attribute` refers to the attribute currently being validated while `$params` contains an array of
-     * validator configuration options such as `max` in case of `string` validator. The value of the attribute currently being validated    
-     * can be accessed as `$this->$attribute`. Note the `$` before `attribute`; this is taking the value of the variable
-     * `$attribute` and using it as the name of the property to access.
+     * In the above `$attribute` refers to currently validated attribute name while `$params` contains an array of
+     * validator configuration options such as `max` in case of `string` validator. Currently validate attribute value
+     * can be accessed as `$this->[$attribute]`.
      *
      * Yii also provides a set of [[Validator::builtInValidators|built-in validators]].
-     * Each one has an alias name which can be used when specifying a validation rule.
+     * They each has an alias name which can be used when specifying a validation rule.
      *
      * Below are some examples:
      *
@@ -618,7 +617,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
     {
         foreach ($items as $attribute => $errors) {
             if (is_array($errors)) {
-                foreach ($errors as $error) {
+                foreach($errors as $error) {
                     $this->addError($attribute, $error);
                 }
             } else {
@@ -925,7 +924,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Returns an iterator for traversing the attributes in the model.
-     * This method is required by the interface [[\IteratorAggregate]].
+     * This method is required by the interface IteratorAggregate.
      * @return ArrayIterator an iterator for traversing the items in the list.
      */
     public function getIterator()
@@ -936,7 +935,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Returns whether there is an element at the specified offset.
-     * This method is required by the SPL interface [[\ArrayAccess]].
+     * This method is required by the SPL interface `ArrayAccess`.
      * It is implicitly called when you use something like `isset($model[$offset])`.
      * @param mixed $offset the offset to check on
      * @return boolean
@@ -948,7 +947,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Returns the element at the specified offset.
-     * This method is required by the SPL interface [[\ArrayAccess]].
+     * This method is required by the SPL interface `ArrayAccess`.
      * It is implicitly called when you use something like `$value = $model[$offset];`.
      * @param mixed $offset the offset to retrieve element.
      * @return mixed the element at the offset, null if no element is found at the offset
@@ -960,7 +959,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Sets the element at the specified offset.
-     * This method is required by the SPL interface [[\ArrayAccess]].
+     * This method is required by the SPL interface `ArrayAccess`.
      * It is implicitly called when you use something like `$model[$offset] = $item;`.
      * @param integer $offset the offset to set element
      * @param mixed $item the element value
@@ -972,7 +971,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
 
     /**
      * Sets the element value at the specified offset to null.
-     * This method is required by the SPL interface [[\ArrayAccess]].
+     * This method is required by the SPL interface `ArrayAccess`.
      * It is implicitly called when you use something like `unset($model[$offset])`.
      * @param mixed $offset the offset to unset element
      */

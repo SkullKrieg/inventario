@@ -54,6 +54,7 @@ class Usuario extends \yii\db\ActiveRecord
             'username' => 'Usuario',
             'password' => 'Password',
             'superuser' => 'Super Usuario',
+            //'ejecutivo' => 'Ejecutivo',
 
             'gruposActuales' => 'Grupos',
             'usuario_nombre' => 'Nombre',
@@ -167,27 +168,38 @@ class Usuario extends \yii\db\ActiveRecord
         $menu=[
                                 ['label'=>'Permisos', 'items'=>[
                                                                     ['label'=>'Usuarios','url' =>['usuario/index']],
+                                                                    ['label'=>'Bitacora','url' =>['bitacora/index']],
                                                                     ['label'=>'Grupos','url' =>['grupo/index']],
                                                                     ['label'=>'Acciones','url' =>['accion/index']],
-                                                                    ['label'=>'Bitacora','url' =>['bitacora/index']],
                                                         ]],
+
                                 ['label'=>'Ubicaciones', 'items'=>[
+                                                                    ['label'=>'Colonias','url' =>['colonia/index']],
+                                                                    ['label'=>'Lugares','url' =>['lugar/index']],
                                                                     ['label'=>'Municipios','url' =>['municipio/index']],
-                                                                    ['label'=>'Localidades','url' =>['localidad/index']],
-                                                                    ['label'=>'Edificios','url' =>['edificio/index']],
-                                                                    ['label'=>'Zona','url' =>['zona/index']],
+                                                                    ['label'=>'Poblaciones','url' =>['poblacion/index']],
+                                                                    ['label'=>'Tipo de Lugar','url' =>['tipo-lugar/index']],
+                                                                    ['label'=>'Zonas','url' =>['zona/index']],
                                                         ]],
-                                ['label'=>'Dependencias', 'items'=>[
-                                                                    ['label'=>'Dependencia','url' =>['dependencia/index']],
-                                                                    ['label'=>'Subdependencia','url' =>['subdependencia/index']],
-                                                                    ['label'=>'Direccion','url' =>['direccion/index']],
-                                                                    ['label'=>'Area','url' =>['area/index']],
+                                ['label'=>'Catalogos', 'items'=>[
+                                                                    ['label'=>'Tipo de Incidente','url' =>['clase-incidente/index']],
+                                                                    ['label'=>'Detalle de Incidente','url' =>['subclase-incidente/index']],
+                                                                    ['label'=>'Corporaciones','url' =>['corporacion/index']],
+                                                                    ['label'=>'Tipo de corporacion','url' =>['tipo-corporacion/index']],
+                                                                    ['label'=>'Estado de la Persona','url' =>['estado-persona/index']],
+                                                                    ['label'=>'Estado del vehiculo','url' =>['estado-vehiculo/index']],
+                                                                    ['label'=>'Marca del Vehiculo','url' =>['marca-vehiculo/index']],
+                                                                    ['label'=>'Linea del vehiculo','url' =>['gama-vehiculo/index']],                                                                    
+                                                        ]],  
+
+                                ['label'=>'Incidentes', 'items'=>[
+                                                                    ['label'=>'Incidentes','url' =>['incidente/index']],
                                                         ]]                                                                                                               
                 ];
 
         if(Yii::$app->user->isGuest)
             return [];
+       
         return $menu;
     }
 }
-

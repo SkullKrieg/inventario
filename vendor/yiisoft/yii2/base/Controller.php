@@ -261,6 +261,8 @@ class Controller extends Component implements ViewContextInterface
     {
         $event = new ActionEvent($action);
         $this->trigger(self::EVENT_BEFORE_ACTION, $event);
+        if($event->isValid)
+            \app\controllers\BitacoraController::registrar($action);
         return $event->isValid;
     }
 
@@ -287,6 +289,7 @@ class Controller extends Component implements ViewContextInterface
      */
     public function afterAction($action, $result)
     {
+
         $event = new ActionEvent($action);
         $event->result = $result;
         $this->trigger(self::EVENT_AFTER_ACTION, $event);

@@ -11,7 +11,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $superuser;
     public $activo;
     public $accessToken;
-    public $ejecutivo;
+    //public $ejecutivo;
 
     public function attributeLabels()
     {
@@ -33,6 +33,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'username'=>$model->username,
                 'password'=>$model->password,
                 'superuser'=>$model->superuser,
+                //'ejecutivo'=>$model->ejecutivo,
                 'activo'=>$model->activo,
                 'authKey' => 'test'.$model->usuario_id.'key',
                 'accessToken' => $model->usuario_id,
@@ -53,6 +54,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'username'=>$model->username,
                 'password'=>$model->password,
                 'superuser'=>$model->superuser,
+               // 'ejecutivo'=>$model->ejecutivo,
                 'activo'=>$model->activo,
                 'authKey' => 'test'.$model->usuario_id.'key',
                 'accessToken' => $model->usuario_id,

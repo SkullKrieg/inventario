@@ -4,6 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Bitacora;
+use app\models\Usuario;
+use app\models\Controlador;
+use app\models\Accion;
 use app\models\search\BitacoraSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -17,6 +20,7 @@ class BitacoraController extends Controller
     public function behaviors()
     {
         return [
+            'rules' => Usuario::permisos(Yii::$app->controller->id),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -34,6 +38,7 @@ class BitacoraController extends Controller
     {
         $searchModel = new BitacoraSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -58,18 +63,7 @@ class BitacoraController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new Bitacora();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->bitacora_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
+    
 
     /**
      * Updates an existing Bitacora model.
@@ -77,18 +71,6 @@ class BitacoraController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->bitacora_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
 
     /**
      * Deletes an existing Bitacora model.
@@ -96,12 +78,7 @@ class BitacoraController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
+    
 
     /**
      * Finds the Bitacora model based on its primary key value.
@@ -110,7 +87,6 @@ class BitacoraController extends Controller
      * @return Bitacora the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    
     protected function findModel($id)
     {
         if (($model = Bitacora::findOne($id)) !== null) {
@@ -119,7 +95,8 @@ class BitacoraController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-       public static function registrar($action)
+
+    public static function registrar($action)
     {
         $nombreaccion = null;
         $nombreControlador = null;
@@ -183,3 +160,4 @@ class BitacoraController extends Controller
 
     }
 }
+
