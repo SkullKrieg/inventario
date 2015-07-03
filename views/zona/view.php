@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zona */
 
-$this->title = $model->zona_id;
-$this->params['breadcrumbs'][] = ['label' => 'Zonas', 'url' => ['index']];
+$this->title = $model->zona_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Zona', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zona-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->zona_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->zona_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->zona_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->zona_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Seguro que quieres eliminar este objeto?',
                 'method' => 'post',
             ],
         ]) ?>

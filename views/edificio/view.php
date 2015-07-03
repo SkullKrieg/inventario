@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Edificio */
 
-$this->title = $model->edificio_id;
-$this->params['breadcrumbs'][] = ['label' => 'Edificios', 'url' => ['index']];
+$this->title = $model->edificio_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Edificio', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edificio-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->edificio_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->edificio_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->edificio_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->edificio_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Seguro que quieres eliminar este objeto?',
                 'method' => 'post',
             ],
         ]) ?>

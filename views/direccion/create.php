@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Direccion */
 
-$this->title = 'Create Direccion';
-$this->params['breadcrumbs'][] = ['label' => 'Direccions', 'url' => ['index']];
+$this->title = 'Agregar Direccion';
+$this->params['breadcrumbs'][] = ['label' => 'Direccion', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="direccion-create">

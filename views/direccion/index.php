@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\DireccionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Direccions';
+$this->title = 'Direccion';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="direccion-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Direccion', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Direccion', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

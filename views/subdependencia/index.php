@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\SubdependenciaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Subdependencias';
+$this->title = 'Subdependencia';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subdependencia-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Subdependencia', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Subdependencia', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Subdependencia */
 
-$this->title = 'Create Subdependencia';
-$this->params['breadcrumbs'][] = ['label' => 'Subdependencias', 'url' => ['index']];
+$this->title = 'Agregar Subdependencia';
+$this->params['breadcrumbs'][] = ['label' => 'Subdependencia', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subdependencia-create">

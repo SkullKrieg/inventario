@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\ZonaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Zonas';
+$this->title = 'Zona';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zona-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Zona', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Zona', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

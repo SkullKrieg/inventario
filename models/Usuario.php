@@ -170,7 +170,19 @@ class Usuario extends \yii\db\ActiveRecord
                                                                     ['label'=>'Grupos','url' =>['grupo/index']],
                                                                     ['label'=>'Acciones','url' =>['accion/index']],
                                                                     ['label'=>'Bitacora','url' =>['bitacora/index']],
-                                                        ]]                                                                                                             
+                                                        ]],
+                                ['label'=>'Ubicaciones', 'items'=>[
+                                                                    ['label'=>'Municipios','url' =>['municipio/index']],
+                                                                    ['label'=>'Localidades','url' =>['localidad/index']],
+                                                                    ['label'=>'Edificios','url' =>['edificio/index']],
+                                                                    ['label'=>'Zona','url' =>['zona/index']],
+                                                        ]],
+                                ['label'=>'Dependencias', 'items'=>[
+                                                                    ['label'=>'Dependencia','url' =>['dependencia/index']],
+                                                                    ['label'=>'Subdependencia','url' =>['subdependencia/index']],
+                                                                    ['label'=>'Direccion','url' =>['direccion/index']],
+                                                                    ['label'=>'Area','url' =>['area/index']],
+                                                        ]]                                                                                                               
                 ];
 
         if(Yii::$app->user->isGuest)

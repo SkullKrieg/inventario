@@ -5,6 +5,6 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Dont give a F@#$!</h1>
+        <h1>Get Ready For This!</h1>
     </div>
 </div>

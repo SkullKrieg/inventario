@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\AreaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Areas';
+$this->title = 'Area';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="area-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Area', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Area', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -28,9 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'area_id',
             'area_nombre',
             'direccion_id',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
 </div>
