@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\DireccionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Direccion';
+$this->title = 'Direcciones';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="direccion-index">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'direccion_id',
+            //'direccion_id',
             'direccion_nombre',
             'subdependencia_id',
 

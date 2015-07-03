@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\SubdependenciaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Subdependencia';
+$this->title = 'Subdependencias';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subdependencia-index">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'subdependencia_id',
+            //'subdependencia_id',
             'subdependencia_nombre',
             'dependencia_id',
 

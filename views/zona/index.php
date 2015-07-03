@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\ZonaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Zona';
+$this->title = 'Zonas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zona-index">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'zona_id',
+            //'zona_id',
             'zona_nombre',
 
             ['class' => 'yii\grid\ActionColumn'],
