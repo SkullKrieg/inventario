@@ -12,6 +12,7 @@ use app\models\Localidad;
  */
 class LocalidadSearch extends Localidad
 {
+    public $municipioName;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,7 @@ class LocalidadSearch extends Localidad
         return [
             [['localidad_id', 'municipio_id'], 'integer'],
             [['localidad_nombre'], 'safe'],
+            [['municipioName'],'safe'],
         ];
     }
 
@@ -47,9 +49,22 @@ class LocalidadSearch extends Localidad
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'localidad_nombre',
+                    'municipioName'=>[
+                        'asc'=>['municipio.municipio_nombre'=>SORT_ASC],
+                        'desc'=>['municipio.municipio_nombre'=>SORT_DESC],
+                        'label'=>'Municipio'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
+            $query->joinWith('municipio');
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
@@ -61,6 +76,14 @@ class LocalidadSearch extends Localidad
         ]);
 
         $query->andFilterWhere(['like', 'localidad_nombre', $this->localidad_nombre]);
+        $query->andFilterWhere(['like', 'municipio_id', $this->municipio_id]);
+
+        $query->joinWith(['municipio'=>function ($q) 
+        {
+            if(!empty($this->municipioName))
+            $q->where('municipio.municipio_nombre LIKE "%' . 
+            $this->municipioName . '%"');
+        }]);
 
         return $dataProvider;
     }

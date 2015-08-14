@@ -27,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'municipio_id',
             'municipio_nombre',
-            'zona_id',
+            //'zona_id',
+            'zonaName',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

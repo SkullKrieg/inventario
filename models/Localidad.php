@@ -45,6 +45,7 @@ class Localidad extends \yii\db\ActiveRecord
             'localidad_id' => 'Localidad ID',
             'localidad_nombre' => 'Localidad Nombre',
             'municipio_id' => 'Municipio ID',
+            'municipioName' => 'Municipio',
         ];
     }
 
@@ -62,5 +63,10 @@ class Localidad extends \yii\db\ActiveRecord
     public function getMunicipio()
     {
         return $this->hasOne(Municipio::className(), ['municipio_id' => 'municipio_id']);
+    }
+
+    public function getmunicipioName()
+    {
+        return isset($this->municipio->municipio_nombre)?$this->municipio->municipio_nombre:'';
     }
 }

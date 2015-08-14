@@ -8,6 +8,7 @@ use app\models\search\MunicipioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Zona;
 
 /**
  * MunicipioController implements the CRUD actions for Municipio model.
@@ -33,6 +34,7 @@ class MunicipioController extends Controller
     public function actionIndex()
     {
         $searchModel = new MunicipioSearch();
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,13 +62,16 @@ class MunicipioController extends Controller
      */
     public function actionCreate()
     {
+        $data = Zona::find()->all();
         $model = new Municipio();
+        $zonas = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'zona_id','zona_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->municipio_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'zonas' =>$zonas,
             ]);
         }
     }
@@ -79,13 +84,17 @@ class MunicipioController extends Controller
      */
     public function actionUpdate($id)
     {
+        $data = Zona::find()->all();
         $model = $this->findModel($id);
+        $zonas = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'zona_id','zona_nombre');
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->municipio_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'zonas' =>$zonas,
             ]);
         }
     }

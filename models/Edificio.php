@@ -43,7 +43,8 @@ class Edificio extends \yii\db\ActiveRecord
         return [
             'edificio_id' => 'Edificio ID',
             'edificio_nombre' => 'Edificio Nombre',
-            'localidad_id' => 'Localidad ID',
+            'localidad_id' => 'Localidad',
+            'localidadName' => 'Localidad',
         ];
     }
 
@@ -53,5 +54,10 @@ class Edificio extends \yii\db\ActiveRecord
     public function getLocalidad()
     {
         return $this->hasOne(Localidad::className(), ['localidad_id' => 'localidad_id']);
+    }
+
+    public function getlocalidadName()
+    {
+        return isset($this->localidad->localidad_nombre)?$this->localidad->localidad_nombre:'';
     }
 }

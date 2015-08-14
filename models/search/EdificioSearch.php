@@ -12,6 +12,8 @@ use app\models\Edificio;
  */
 class EdificioSearch extends Edificio
 {
+
+    public $localidadName;
     /**
      * @inheritdoc
      */
@@ -20,6 +22,7 @@ class EdificioSearch extends Edificio
         return [
             [['edificio_id', 'localidad_id'], 'integer'],
             [['edificio_nombre'], 'safe'],
+            [['localidadName'],'safe'],
         ];
     }
 
@@ -47,9 +50,22 @@ class EdificioSearch extends Edificio
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'edificio_nombre',
+                    'localidadName'=>[
+                        'asc'=>['localidad.localidad_nombre'=>SORT_ASC],
+                        'desc'=>['localidad.localidad_nombre'=>SORT_DESC],
+                        'label'=>'Localidad'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
+            $query->joinWith('localidad');
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
@@ -61,6 +77,15 @@ class EdificioSearch extends Edificio
         ]);
 
         $query->andFilterWhere(['like', 'edificio_nombre', $this->edificio_nombre]);
+        $query->andFilterWhere(['localidad_id' => $this->localidad_id]);
+
+        $query->joinWith(['localidad'=>function ($q) 
+        {
+            if(!empty($this->localidadName))
+            $q->where('localidad.localidad_nombre LIKE "%' . 
+            $this->localidadName . '%"');
+        }]);
+
 
         return $dataProvider;
     }

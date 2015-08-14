@@ -45,6 +45,7 @@ class Municipio extends \yii\db\ActiveRecord
             'municipio_id' => 'Municipio ID',
             'municipio_nombre' => 'Municipio Nombre',
             'zona_id' => 'Zona ID',
+            'zonaName' => 'Zona',
         ];
     }
 
@@ -62,5 +63,10 @@ class Municipio extends \yii\db\ActiveRecord
     public function getZona()
     {
         return $this->hasOne(Zona::className(), ['zona_id' => 'zona_id']);
+    }
+
+    public function getzonaName()
+    {
+        return isset($this->zona->zona_nombre)?$this->zona->zona_nombre:'';
     }
 }

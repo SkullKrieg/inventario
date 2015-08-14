@@ -8,6 +8,7 @@ use app\models\search\EdificioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Localidad;
 
 /**
  * EdificioController implements the CRUD actions for Edificio model.
@@ -61,12 +62,15 @@ class EdificioController extends Controller
     public function actionCreate()
     {
         $model = new Edificio();
+        $data = Localidad::find()->all();
+        $localidades = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'localidad_id','localidad_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->edificio_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'localidades' => $localidades,
             ]);
         }
     }
@@ -80,12 +84,15 @@ class EdificioController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data = Localidad::find()->all();
+        $localidades = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'localidad_id','localidad_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->edificio_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'localidades' => $localidades,
             ]);
         }
     }

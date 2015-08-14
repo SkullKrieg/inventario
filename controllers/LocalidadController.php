@@ -8,6 +8,7 @@ use app\models\search\LocalidadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Municipio;
 
 /**
  * LocalidadController implements the CRUD actions for Localidad model.
@@ -61,12 +62,15 @@ class LocalidadController extends Controller
     public function actionCreate()
     {
         $model = new Localidad();
+        $data = Municipio::find()->all();
+        $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->localidad_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'municipios' => $municipios,
             ]);
         }
     }
@@ -80,12 +84,15 @@ class LocalidadController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data = Municipio::find()->all();
+        $municipios = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'municipio_id','municipio_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->localidad_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'municipios' => $municipios,
             ]);
         }
     }
