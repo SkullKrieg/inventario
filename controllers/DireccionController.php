@@ -8,6 +8,7 @@ use app\models\search\DireccionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Subdependencia;
 
 /**
  * DireccionController implements the CRUD actions for Direccion model.
@@ -61,12 +62,16 @@ class DireccionController extends Controller
     public function actionCreate()
     {
         $model = new Direccion();
+        $data = Subdependencia::find()->all();
+        $subdependencias = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'subdependencia_id','subdependencia_nombre');
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->direccion_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'subdependencias' => $subdependencias,
             ]);
         }
     }
@@ -80,12 +85,16 @@ class DireccionController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data = Subdependencia::find()->all();
+        $subdependencias = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'subdependencia_id','subdependencia_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->direccion_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'subdependencias' => $subdependencias,
+
             ]);
         }
     }

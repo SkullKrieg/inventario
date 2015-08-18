@@ -12,6 +12,7 @@ use app\models\Subdependencia;
  */
 class SubdependenciaSearch extends Subdependencia
 {
+    public $dependenciaName;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,7 @@ class SubdependenciaSearch extends Subdependencia
         return [
             [['subdependencia_id', 'dependencia_id'], 'integer'],
             [['subdependencia_nombre'], 'safe'],
+            [['dependenciaName'], 'safe'],
         ];
     }
 
@@ -47,9 +49,22 @@ class SubdependenciaSearch extends Subdependencia
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes' => [
+                    'subdependencia_nombre',
+                    'dependenciaName' => [
+                        'asc'=>['dependencia.dependencia_nombre'=>SORT_ASC],
+                        'desc'=>['dependencia.dependencia_nombre'=>SORT_DESC],
+                        'label' => 'dependencia',
+                    ],
+                ]
+
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
+            $query->joinWith('dependencia');
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
@@ -61,6 +76,16 @@ class SubdependenciaSearch extends Subdependencia
         ]);
 
         $query->andFilterWhere(['like', 'subdependencia_nombre', $this->subdependencia_nombre]);
+        $query->andFilterWhere(['like', 'dependencia_id', $this->dependencia_id]);
+
+        $query->joinWith(['dependencia'=> function ($q)
+            {
+                if(empty($this->dependenciaName))
+                $q->where('dependencia.dependencia_nombre LIKE "%' .
+                    $this->dependenciaName . '%"');
+            }
+        ]);
+
 
         return $dataProvider;
     }

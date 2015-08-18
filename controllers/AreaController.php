@@ -8,6 +8,7 @@ use app\models\search\AreaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Direccion;
 
 /**
  * AreaController implements the CRUD actions for Area model.
@@ -61,12 +62,15 @@ class AreaController extends Controller
     public function actionCreate()
     {
         $model = new Area();
+        $data = Direccion::find()->all();
+        $direcciones = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'direccion_id','direccion_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->area_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'direcciones' => $direcciones,
             ]);
         }
     }
@@ -80,12 +84,16 @@ class AreaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data = Direccion::find()->all();
+        $direcciones = (count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'direccion_id','direccion_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->area_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'direcciones' => $direcciones,
+
             ]);
         }
     }

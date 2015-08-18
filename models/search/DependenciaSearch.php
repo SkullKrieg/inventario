@@ -12,6 +12,7 @@ use app\models\Dependencia;
  */
 class DependenciaSearch extends Dependencia
 {
+    public $dependeciaName;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,7 @@ class DependenciaSearch extends Dependencia
         return [
             [['dependencia_id'], 'integer'],
             [['dependencia_nombre'], 'safe'],
+            [['dependeciaName'], 'safe'],
         ];
     }
 

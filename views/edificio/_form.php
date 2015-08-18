@@ -12,13 +12,12 @@ use kartik\widgets\Select2;
 <div class="edificio-form">
 
     <?php $form = ActiveForm::begin(); ?>
-         <div class="col-md-6">
+    	<div class="col-md-6">
+    		<?= $form->field($model, 'edificio_nombre')->textInput(['maxlength' => true]) ?>
+		</div>
 
-    <?= $form->field($model, 'edificio_nombre')->textInput(['maxlength' => true]) ?>
-	</div>
-
-     <div class="col-md-6">
-			    <?= $form->field($model, 'localidad_id')->widget(Select2::classname(),[
+     	<div class="col-md-6">
+			<?= $form->field($model, 'localidad_id')->widget(Select2::classname(),[
 			    					'language' => 'es_MX',
 			                        'data' => $localidades,
 			                        

@@ -44,7 +44,8 @@ class Direccion extends \yii\db\ActiveRecord
         return [
             'direccion_id' => 'Direccion ID',
             'direccion_nombre' => 'Direccion Nombre',
-            'subdependencia_id' => 'Subdependencia ID',
+            'subdependencia_id' => 'Subdependencia',
+            'subdependenciaName' => 'Subdependencia',
         ];
     }
 
@@ -62,5 +63,10 @@ class Direccion extends \yii\db\ActiveRecord
     public function getSubdependencia()
     {
         return $this->hasOne(Subdependencia::className(), ['subdependencia_id' => 'subdependencia_id']);
+    }
+
+    public function getsubdependenciaName()
+    {
+        return isset($this->subdependencia->subdependencia_nombre)?$this->subdependencia->subdependencia_nombre:'';
     }
 }

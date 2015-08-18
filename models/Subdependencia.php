@@ -44,7 +44,8 @@ class Subdependencia extends \yii\db\ActiveRecord
         return [
             'subdependencia_id' => 'Subdependencia ID',
             'subdependencia_nombre' => 'Subdependencia Nombre',
-            'dependencia_id' => 'Dependencia ID',
+            'dependencia_id' => 'Dependencia',
+            'dependenciaName' => 'Dependencia',
         ];
     }
 
@@ -62,5 +63,10 @@ class Subdependencia extends \yii\db\ActiveRecord
     public function getDependencia()
     {
         return $this->hasOne(Dependencia::className(), ['dependencia_id' => 'dependencia_id']);
+    }
+
+    public function getdependenciaName()
+    {
+        return isset($this->dependencia->dependencia_nombre)?$this->dependencia->dependencia_nombre:'';
     }
 }

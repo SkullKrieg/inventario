@@ -43,7 +43,8 @@ class Area extends \yii\db\ActiveRecord
         return [
             'area_id' => 'Area ID',
             'area_nombre' => 'Area Nombre',
-            'direccion_id' => 'Direccion ID',
+            'direccion_id' => 'Direccion',
+            'direccionName' => 'Direccion',
         ];
     }
 
@@ -53,5 +54,10 @@ class Area extends \yii\db\ActiveRecord
     public function getDireccion()
     {
         return $this->hasOne(Direccion::className(), ['direccion_id' => 'direccion_id']);
+    }
+
+    public function getdireccionName()
+    {
+        return isset($this->direccion->direccion_nombre)?$this->direccion->direccion_nombre:'';
     }
 }

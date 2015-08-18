@@ -12,6 +12,7 @@ use app\models\Direccion;
  */
 class DireccionSearch extends Direccion
 {
+    public $subdependenciaName;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,7 @@ class DireccionSearch extends Direccion
         return [
             [['direccion_id', 'subdependencia_id'], 'integer'],
             [['direccion_nombre'], 'safe'],
+            [['subdependenciaName'], 'safe'],
         ];
     }
 
@@ -47,9 +49,22 @@ class DireccionSearch extends Direccion
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'direccion_nombre',
+                    'subdependenciaName'=>[
+                        'asc'=>['subdependencia.subdependencia_nombre'=>SORT_ASC],
+                        'desc'=>['subdependencia.subdependencia_nombre'=>SORT_DESC],
+                        'label'=>'Subdependencia'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
+            $query->joinWith('subdependencia');
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
@@ -61,6 +76,14 @@ class DireccionSearch extends Direccion
         ]);
 
         $query->andFilterWhere(['like', 'direccion_nombre', $this->direccion_nombre]);
+        $query->andFilterWhere(['like', 'subdependencia_id', $this->subdependencia_id]);
+
+        $query->joinWith(['subdependencia'=>function ($q) 
+        {
+            if(!empty($this->subdependenciaName))
+            $q->where('subdependencia.subdependencia_nombre LIKE "%' . 
+            $this->subdependenciaName . '%"');
+        }]);
 
         return $dataProvider;
     }

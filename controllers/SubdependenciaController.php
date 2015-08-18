@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Subdependencia;
+use app\models\Dependencia;
 use app\models\search\SubdependenciaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,12 +62,15 @@ class SubdependenciaController extends Controller
     public function actionCreate()
     {
         $model = new Subdependencia();
+        $data = Dependencia::find()->all();
+        $dependencias = (count($data)==0)?[''=>'']:\yii\helpers\ArrayHelper::map($data, 'dependencia_id','dependencia_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->subdependencia_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'dependencias' => $dependencias,
             ]);
         }
     }
@@ -80,12 +84,15 @@ class SubdependenciaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data = Dependencia::find()->all();
+        $dependencias = (count($data)==0)?[''=>'']:\yii\helpers\ArrayHelper::map($data,'dependencia_id,dependencia_nombre');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->subdependencia_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'dependencias' => $dependencias,
             ]);
         }
     }

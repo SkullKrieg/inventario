@@ -12,6 +12,7 @@ use app\models\Area;
  */
 class AreaSearch extends Area
 {
+    public $direccionName;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,7 @@ class AreaSearch extends Area
         return [
             [['area_id', 'direccion_id'], 'integer'],
             [['area_nombre'], 'safe'],
+            [['direccionName'], 'safe'],
         ];
     }
 
@@ -47,9 +49,23 @@ class AreaSearch extends Area
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+                'attributes'=>[
+                    'area_nombre',
+                    'direccionName'=>[
+                        'asc'=>['direccion.direccin_nombre'=>SORT_ASC],
+                        'desc'=>['direccion.direccion_nombre'=>SORT_DESC],
+                        'label'=>'Direccion'
+
+                    ],
+                ]
+            ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
+            $query->joinWith('direccion');
+
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
@@ -61,6 +77,15 @@ class AreaSearch extends Area
         ]);
 
         $query->andFilterWhere(['like', 'area_nombre', $this->area_nombre]);
+        $query->andFilterWhere(['like', 'direccion_id', $this->direccion_id]);
+
+
+        $query->joinWith(['direccion'=>function ($q) 
+        {
+            if(!empty($this->subdependenciaName))
+            $q->where('direccion.direccion_nombre LIKE "%' . 
+            $this->direccionName . '%"');
+        }]);
 
         return $dataProvider;
     }
